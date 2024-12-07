@@ -1,19 +1,28 @@
+import database from 'database/database.json';
 import React, { useState } from 'react';
 import { SafeAreaView, View, Image } from 'react-native';
 
-import List from './list';
+import EmployeeListRender from './list';
 import Map from './map';
 import CustomButton from '../../components/CustomButton';
 import { icons } from '../../constants';
 
 const ButtonLayout = () => {
   const [activeTab, setActiveTab] = useState('list');
+  const [filteredEmployees, setFilteredEmployees] = useState(database.employees);
+
+  const applyFilter = () => {
+    const sortedEmployees = [...filteredEmployees].sort((a, b) =>
+      a.position.localeCompare(b.position)
+    );
+    setFilteredEmployees(sortedEmployees);
+  };
 
   return (
     <>
       <SafeAreaView className="h-full">
-        <View className="flex-1">
-          <View className="h-[110px] w-full px-4 bg-[#FFFFFF]">
+        <View className="flex-1 bg-[#FFFFFF]">
+          <View className="h-[110px] w-full px-4 bg-[#FFFFFF] shadow">
             <View className="flex-row w-full justify-between mt-3">
               <CustomButton
                 title="Список"
@@ -48,13 +57,14 @@ const ButtonLayout = () => {
               title="Фильтр"
               containerStyles="bg-[#306FE3] w-full mt-3"
               textStyles="text-white"
+              handlePress={applyFilter}
             />
           </View>
 
           <View>
             {activeTab === 'list' ? (
               <View>
-                <List />
+                <EmployeeListRender data={filteredEmployees} />
               </View>
             ) : (
               <View>
