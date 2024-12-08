@@ -4,7 +4,7 @@ const WayLayout = () => {
   return (
     <>
       <Stack>
-        <Stack.Screen name="WayEmployee" options={{ title: 'Передвижения', headerShown: false }} />
+        <Stack.Screen name="[way]" options={{ headerShown: false }} />
       </Stack>
     </>
   );

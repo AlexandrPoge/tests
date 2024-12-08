@@ -1,6 +1,10 @@
 import { Stack } from 'expo-router';
 import '../global.css';
 
+type Props = {
+  way: string;
+};
+
 const RootLayout = () => {
   return (
     <>
@@ -10,9 +14,9 @@ const RootLayout = () => {
         <Stack.Screen
           name="WayEmployee"
           options={({ route }) => ({
-            headerTitle: `Передвижения ${route.params?.name || 'Сотрудник'}`,
+            headerTitle: `Передвижения  ${(route.params as Props)?.way || ''}`,
             headerTintColor: 'white',
-            headerStyle: { backgroundColor: '#306FE3' },
+            headerStyle: { backgroundColor: '#2351A7' },
             headerTitleAlign: 'center',
           })}
         />

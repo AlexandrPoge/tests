@@ -1,5 +1,4 @@
-import { router, useRouter } from 'expo-router';
-import { push } from 'expo-router/build/global-state/routing';
+import { useRouter } from 'expo-router';
 import { View, Text, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 
 import { EMPLOYEE } from '../../types/types';
@@ -11,12 +10,13 @@ type Props = {
 const EmployeeListRender = ({ data }: Props) => {
   const router = useRouter();
 
+  // рендер списка сотрудников
   const renderEmployee = ({ item }: { item: EMPLOYEE }) => (
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: '/WayEmployee/WayEmployee',
-          params: { id: item.id, name: item.name },
+          pathname: '/WayEmployee/[way]',
+          params: { way: item.name, name: item.name },
         })
       }
       className="p-4 border-b border-gray-300">
@@ -26,6 +26,7 @@ const EmployeeListRender = ({ data }: Props) => {
     </TouchableOpacity>
   );
 
+  // показываю список сотрудников
   return (
     <SafeAreaView className="h-full mt-3">
       <View className=" bg-white">
