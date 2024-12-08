@@ -55,9 +55,12 @@ const ButtonLayout = () => {
 
             <CustomButton
               title="Фильтр"
-              containerStyles="bg-[#306FE3] w-full mt-3"
-              textStyles="text-white"
+              containerStyles={
+                activeTab === 'map' ? 'bg-[#E2E2E2] w-full mt-3' : 'bg-[#306FE3] w-full mt-3'
+              }
+              textStyles={activeTab === 'map' ? 'text-white' : 'text-white'}
               handlePress={applyFilter}
+              disabled={activeTab === 'map'}
             />
           </View>
 
@@ -68,7 +71,7 @@ const ButtonLayout = () => {
               </View>
             ) : (
               <View>
-                <Map />
+                <Map employees={filteredEmployees} />
               </View>
             )}
           </View>
