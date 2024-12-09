@@ -2,22 +2,26 @@ import database from 'database/database.json';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Image, Text, TouchableOpacity, Button } from 'react-native';
 
 import EmployeeListRender from './list';
 import Map from './map';
 import CustomButton from '../../components/CustomButton';
 import { icons } from '../../constants';
 
+type SortKey = 'name' | 'position' | 'phone';
+
 const ButtonLayout = () => {
   const [activeTab, setActiveTab] = useState('list');
   const [filteredEmployees, setFilteredEmployees] = useState(database.employees);
+  const [isDropDown, setIsDropDown] = useState<boolean>(false);
+  const [activeFilter, setActiveFilter] = useState();
 
-  const applyFilter = () => {
-    const sortedEmployees = [...filteredEmployees].sort((a, b) =>
-      a.position.localeCompare(b.position)
-    );
+  const sortEmployees = (key: SortKey): void => {
+    const sortedEmployees = [...filteredEmployees].sort((a, b) => a[key].localeCompare(b[key]));
     setFilteredEmployees(sortedEmployees);
+    setIsDropDown(false);
+    setActiveFilter(activeFilter);
   };
 
   const router = useRouter();
@@ -68,10 +72,33 @@ const ButtonLayout = () => {
                 activeTab === 'map' ? 'bg-[#E2E2E2] w-full mt-3' : 'bg-[#306FE3] w-full mt-3'
               }
               textStyles={activeTab === 'map' ? 'text-white' : 'text-white'}
-              handlePress={applyFilter}
+              handlePress={() => setIsDropDown(!isDropDown)}
               disabled={activeTab === 'map'}
             />
           </View>
+
+          {/*Дропдаун*/}
+          {isDropDown && (
+            <View className="bg-white w-full mt-4 rounded-lg shadow-lg p-4 z-10">
+              <Text className="text-lg text-center font-semibold mb-4">{t('Фильтровать по:')}</Text>
+              {/* Кнопки */}
+              <TouchableOpacity
+                className="bg-gray-100 py-2 px-4 rounded-md mb-2 border border-gray-300 "
+                onPress={() => sortEmployees('position')}>
+                <Text className="text-center font-medium text-gray-700">{t('Должность')}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="bg-gray-100 py-2 px-4 rounded-md mb-2 border border-gray-300 "
+                onPress={() => sortEmployees('name')}>
+                <Text className="text-center font-medium text-gray-700">{t('ФИО')}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="bg-gray-100 py-2 px-4 rounded-md border border-gray-300 "
+                onPress={() => sortEmployees('phone')}>
+                <Text className="text-center font-medium text-gray-700">{t('Номер телефона')}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/*В зависимости какая кнопка активна*/}
           <View>

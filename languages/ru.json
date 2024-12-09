@@ -41,5 +41,14 @@
   "An error occurred while trying to make a call": "Произошла ошибка при попытке совершить звонок",
   "Good afternoon, please tell me what case number you are currently working on?": "Добрый день, подскажите пожалуйста, какой номер обращения у вас сейчас в работе?",
   "Failed to open WhatsApp": "Не удалось открыть WhatsApp",
-  "An error occurred while trying to send a message": "Произошла ошибка при попытке отправить сообщение"
+
+  "An error occurred while trying to send a message": "Произошла ошибка при попытке отправить сообщение",
+  "Language setting": "Настройки языка",
+  "Filter by": "Фильтровать по",
+  "Post": "Должность",
+  "Full name": "ФИО",
+  "Phone number": "Номер телефона",
+  "Welcome": "Добро пожаловать!",
+  "We are glad to see you in our application. Click below to get started.": "We are glad to see you in our application. Click below to get started.",
+  "Continue": "Продолжить"
 }
