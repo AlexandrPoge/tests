@@ -4,7 +4,8 @@ const WayLayout = () => {
   return (
     <>
       <Stack>
-        <Stack.Screen name="[way]" options={{ headerShown: false }} />
+        <Stack.Screen name="[name]" options={{ headerShown: false }} />
+        <Stack.Screen name="track" options={{ headerShown: false }} />
       </Stack>
     </>
   );
