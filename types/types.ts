@@ -6,6 +6,7 @@ export interface EMPLOYEE {
   tracks: {
     date: string;
     route: { lat: number; lon: number }[];
+    route2: { lat: number; lon: number }[];
     duration: string;
     distance: string;
     avgSpeed: string;

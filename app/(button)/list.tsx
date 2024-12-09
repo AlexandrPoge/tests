@@ -15,8 +15,8 @@ const EmployeeListRender = ({ data }: Props) => {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: '/WayEmployee/[way]',
-          params: { way: item.name, name: item.name },
+          pathname: '/WayEmployee/[name]',
+          params: { name: item.name, id: item.id },
         })
       }
       className="p-4 border-b border-gray-300">
