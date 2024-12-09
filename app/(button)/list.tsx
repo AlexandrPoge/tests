@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { View, Text, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 
 import { EMPLOYEE } from '../../types/types';
@@ -9,6 +10,7 @@ type Props = {
 
 const EmployeeListRender = ({ data }: Props) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   // рендер списка сотрудников
   const renderEmployee = ({ item }: { item: EMPLOYEE }) => (
@@ -20,8 +22,8 @@ const EmployeeListRender = ({ data }: Props) => {
         })
       }
       className="p-4 border-b border-gray-300">
-      <Text className="text-lg font-medium text-[#333333]">{item.name}</Text>
-      <Text className="text-[#828282]">{item.position}</Text>
+      <Text className="text-lg font-medium text-[#333333]">{t(item.name)}</Text>
+      <Text className="text-[#828282]">{t(item.position)}</Text>
       <Text className="text-[#306FE3]">{item.phone}</Text>
     </TouchableOpacity>
   );
@@ -30,7 +32,9 @@ const EmployeeListRender = ({ data }: Props) => {
   return (
     <SafeAreaView className="h-full mt-3">
       <View className=" bg-white">
-        <Text className="text-center text-xl font-bold text-blue-600 py-4">Список сотрудников</Text>
+        <Text className="text-center text-xl font-bold text-blue-600 py-4">
+          {t('Список сотрудников')}
+        </Text>
         <FlatList
           data={data}
           renderItem={renderEmployee}
