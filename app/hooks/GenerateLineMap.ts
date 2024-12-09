@@ -40,13 +40,13 @@ const useGenerateLineMap = () => {
       id: 'start',
       lat: selectedRoute[0].lat,
       lon: selectedRoute[0].lon,
-      label: 'Начало маршрута',
+      label: 'Start',
     },
     {
       id: 'end',
       lat: selectedRoute[selectedRoute.length - 1].lat,
       lon: selectedRoute[selectedRoute.length - 1].lon,
-      label: 'Конец маршрута',
+      label: 'End',
     },
   ];
 

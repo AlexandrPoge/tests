@@ -1,4 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/core';
+import { useTranslation } from 'react-i18next';
 import { Linking, Alert } from 'react-native';
 
 import database from '../../database/database.json';
@@ -8,6 +9,8 @@ type Props = {
 };
 
 const useCallProgram = () => {
+  const { t } = useTranslation();
+
   // Получение параметров маршрута
   const route = useRoute<RouteProp<Props, 'track'>>();
   const { name } = route.params;
@@ -18,7 +21,7 @@ const useCallProgram = () => {
   // Функция для звонка
   const handleCall = async () => {
     if (!employee?.phone) {
-      Alert.alert('Ошибка', 'Номер телефона сотрудника не найден.');
+      Alert.alert(`${t('Ошибка')}`, `${t('Номер телефона сотрудника не найден')}`);
       return;
     }
 
@@ -28,22 +31,21 @@ const useCallProgram = () => {
       if (supported) {
         await Linking.openURL(phoneUrl);
       } else {
-        Alert.alert('Ошибка', 'Не удалось открыть приложение для звонков.');
+        Alert.alert(`${t('Ошибка')}`, `${t('Не удалось открыть приложение для звонков')}`);
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Произошла ошибка при попытке совершить звонок.');
+      Alert.alert(`${t('Ошибка')}`, `${t('Произошла ошибка при попытке совершить звонок')}}`);
     }
   };
 
   // Функция для сообщения
   const handleMessage = async () => {
     if (!employee?.phone) {
-      Alert.alert('Ошибка', 'Номер телефона сотрудника не найден.');
+      Alert.alert(`${t('Ошибка')}`, `${t('Номер телефона сотрудника не найден')}`);
       return;
     }
 
-    const message =
-      'Добрый день, подскажите пожалуйста, какой номер обращения у вас сейчас в работе?';
+    const message = `${t('Добрый день, подскажите пожалуйста, какой номер обращения у вас сейчас в работе?')}`;
     const whatsappUrl = `whatsapp://send?phone=${employee.phone}&text=${encodeURIComponent(
       message
     )}`;
@@ -53,10 +55,10 @@ const useCallProgram = () => {
       if (supported) {
         await Linking.openURL(whatsappUrl);
       } else {
-        Alert.alert('Ошибка', 'Не удалось открыть WhatsApp.');
+        Alert.alert(`${t('Ошибка')}`, `${t('Не удалось открыть WhatsApp')}`);
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Произошла ошибка при попытке отправить сообщение.');
+      Alert.alert(`${t('Ошибка')}`, `${t('Произошла ошибка при попытке отправить сообщение')}`);
     }
   };
 

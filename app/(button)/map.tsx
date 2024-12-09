@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import { EMPLOYEE } from '../../types/types';
@@ -9,6 +10,8 @@ type Props = {
 };
 
 const Map = ({ employees }: Props) => {
+  const { t } = useTranslation();
+
   // Генерация сотрудников(их точки): только последняя точка маршрута последнего трека
   const markers = employees.map((employee) => {
     const lastTrack = employee.tracks[employee.tracks.length - 1];
@@ -38,8 +41,8 @@ const Map = ({ employees }: Props) => {
           <Marker
             key={marker.id}
             coordinate={{ latitude: marker.lat, longitude: marker.lon }}
-            title={marker.name}
-            description={`Дата: ${marker.date}`}
+            title={t(marker.name)}
+            description={`${t(marker.date)}`}
           />
         ))}
       </MapView>
